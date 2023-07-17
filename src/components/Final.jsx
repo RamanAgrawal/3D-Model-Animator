@@ -12,6 +12,7 @@ const GLTFModel = () => {
     const [speed, setSpeed] = useState(1);
     const [time, setTime] = useState(0);
     const [progress, setProgress] = useState(0);
+    const duration=36
 
     useEffect(() => {
         let scene, renderer, model;
@@ -76,7 +77,7 @@ const GLTFModel = () => {
                 setTime(time)
 
                 // last frame
-                if (mixerRef.current.time >= 36 * 60) {
+                if (mixerRef.current.time >= duration * 60) {
                     isPlayingRef.current = false;
                 }
             }
@@ -88,7 +89,7 @@ const GLTFModel = () => {
     }, []);
 
     const handlePlayPause = () => {
-        if (mixerRef.current.time >= 36 * 60) {
+        if (mixerRef.current.time >= duration * 60) {
             mixerRef.current.time = 0;
         }
         isPlayingRef.current = !isPlayingRef.current;
@@ -128,7 +129,7 @@ const GLTFModel = () => {
              {/* progress bar */}
             <input type="range"
                 value={progress / 60}
-                max={36}
+                max={duration}
                 style={{ width: '100%' }}
                 step={1 / 60}
                 onChange={handleProgressBarChange}
